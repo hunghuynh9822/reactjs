@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import Item from './HeaderCartItem.js';
+import NumberFormat from 'react-number-format';
 const $ = window.$;
 const jQuery = require('jquery');
 
 class HeaderCartItems extends Component {
     componentDidMount() {
         /*[ Show header dropdown ]
-    ===========================================================*/
-    $('.js-show-header-dropdown').on('click', function(){
-        $(this).parent().find('.header-dropdown')
-    });
+        ===========================================================*/
+        $('.js-show-header-dropdown').on('click', function(){
+            $(this).parent().find('.header-dropdown')
+        });
 
-    var menu = $('.js-show-header-dropdown');
-    var sub_menu_is_showed = -1;
+        var menu = $('.js-show-header-dropdown');
+        var sub_menu_is_showed = -1;
 
-    for(var i=0; i<menu.length; i++){
-        $(menu[i]).on('click', function(){ 
-            
+        for(var i=0; i<menu.length; i++){
+            $(menu[i]).on('click', function(){ 
                 if(jQuery.inArray( this, menu ) == sub_menu_is_showed){
                     $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
                     sub_menu_is_showed = -1;
@@ -42,53 +43,52 @@ class HeaderCartItems extends Component {
         sub_menu_is_showed = -1;
     });
     }
+
+    constructor(props) {
+        super(props);
+        this.state={
+            cartItems : [
+                {
+                    tittle: "White Shirt With Pleat Detail Back",
+                    image:"images/item-cart-01.jpg",
+                    count:1,
+                    price:19
+                },
+                {
+                    tittle: "Converse All Star Hi Black Canvas",
+                    image:"images/item-cart-02.jpg",
+                    count:1,
+                    price:39000
+                },
+                {
+                    tittle: "Nixon Porter Leather Watch In Tan",
+                    image:"images/item-cart-03.jpg",
+                    count:1,
+                    price:17
+                }
+            ]
+        };
+    }
+    
+    total = () => {
+        var sum = 0;
+        this.state.cartItems.forEach(e => {
+            sum += e.count * e.price;
+        });
+        return sum;
+    }
     
     render() {
+        var items = this.state.cartItems.map(e => (
+            <Item tittle={e.tittle} image={e.image} count={e.count} price={e.price}></Item>
+        ));
         return (
             <div className="header-cart header-dropdown">
                 <ul className="header-cart-wrapitem">
-                    <li className="header-cart-item">
-                    <div className="header-cart-item-img">
-                        <img src="images/item-cart-01.jpg" alt="IMG" />
-                    </div>
-                    <div className="header-cart-item-txt">
-                        <a href="#" className="header-cart-item-name">
-                        White Shirt With Pleat Detail Back
-                        </a>
-                        <span className="header-cart-item-info">
-                        1 x $19.00
-                        </span>
-                    </div>
-                    </li>
-                    <li className="header-cart-item">
-                    <div className="header-cart-item-img">
-                        <img src="images/item-cart-02.jpg" alt="IMG" />
-                    </div>
-                    <div className="header-cart-item-txt">
-                        <a href="#" className="header-cart-item-name">
-                        Converse All Star Hi Black Canvas
-                        </a>
-                        <span className="header-cart-item-info">
-                        1 x $39.00
-                        </span>
-                    </div>
-                    </li>
-                    <li className="header-cart-item">
-                    <div className="header-cart-item-img">
-                        <img src="images/item-cart-03.jpg" alt="IMG" />
-                    </div>
-                    <div className="header-cart-item-txt">
-                        <a href="#" className="header-cart-item-name">
-                        Nixon Porter Leather Watch In Tan
-                        </a>
-                        <span className="header-cart-item-info">
-                        1 x $17.00
-                        </span>
-                    </div>
-                    </li>
+                    {items}
                 </ul>
                 <div className="header-cart-total">
-                    Total: $75.00
+                    Total: <NumberFormat value={this.total()} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                 </div>
                 <div className="header-cart-buttons">
                     <div className="header-cart-wrapbtn">
