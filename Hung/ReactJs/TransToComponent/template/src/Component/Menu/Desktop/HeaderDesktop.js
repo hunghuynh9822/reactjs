@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TopBar from './TopBar.js';
 import Logo from './Logo.js';
 import Menu from './Menu.js';
+import HeaderIcon from './HeaderIcon.js';
+
 
 class HeaderDesktop extends Component {
     render() {
@@ -13,6 +15,8 @@ class HeaderDesktop extends Component {
                     <Logo></Logo>
                     {/* Menu */}
                     <Menu></Menu>
+                    {/* Header Icon */}
+                    <HeaderIcon></HeaderIcon>
                 </div>
             </div>
         );
