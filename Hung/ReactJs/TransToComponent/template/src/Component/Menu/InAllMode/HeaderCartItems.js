@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Item from './HeaderCartItem.js';
 import NumberFormat from 'react-number-format';
-const $ = window.$;
+import $ from 'jquery'
 const jQuery = require('jquery');
+
+
 
 class HeaderCartItems extends Component {
     componentDidMount() {
@@ -29,19 +31,19 @@ class HeaderCartItems extends Component {
                     $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
                     sub_menu_is_showed = jQuery.inArray( this, menu );
                 }
-        });
-    }
-
-    $(".js-show-header-dropdown, .header-dropdown").click(function(event){
-        event.stopPropagation();
-    });
-
-    $(window).on("click", function(){
-        for (var i = 0; i < menu.length; i++) {
-            $(menu[i]).parent().find('.header-dropdown').removeClass("show-header-dropdown");
+            });
         }
-        sub_menu_is_showed = -1;
-    });
+
+        $(".js-show-header-dropdown, .header-dropdown").click(function(event){
+            event.stopPropagation();
+        });
+
+        $(window).click(function(){
+            for (var i = 0; i < menu.length; i++) {
+                $(menu[i]).parent().find('.header-dropdown').removeClass("show-header-dropdown");
+            }
+            sub_menu_is_showed = -1;
+        });
     }
 
     constructor(props) {
@@ -49,18 +51,21 @@ class HeaderCartItems extends Component {
         this.state={
             cartItems : [
                 {
+                    id: 1,
                     tittle: "White Shirt With Pleat Detail Back",
                     image:"images/item-cart-01.jpg",
                     count:1,
                     price:19
                 },
                 {
+                    id: 2,
                     tittle: "Converse All Star Hi Black Canvas",
                     image:"images/item-cart-02.jpg",
                     count:1,
                     price:39000
                 },
                 {
+                    id: 3,
                     tittle: "Nixon Porter Leather Watch In Tan",
                     image:"images/item-cart-03.jpg",
                     count:1,
@@ -79,8 +84,8 @@ class HeaderCartItems extends Component {
     }
     
     render() {
-        var items = this.state.cartItems.map(e => (
-            <Item tittle={e.tittle} image={e.image} count={e.count} price={e.price}></Item>
+        var items = this.state.cartItems.map((e,i) => (
+            <Item key={i} tittle={e.tittle} image={e.image} count={e.count} price={e.price}></Item>
         ));
         return (
             <div className="header-cart header-dropdown">

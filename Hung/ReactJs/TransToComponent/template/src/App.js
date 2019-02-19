@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import DesktopHeader from '../src/Component/Menu/Desktop/HeaderDesktop.js';
+import MainMenu from './Component/Menu/MainMenu';
 
 class App extends Component {
   render() {
     return (
-      <DesktopHeader></DesktopHeader>
+      // <!-- Header -->
+      <MainMenu></MainMenu>
     );
   }
 }

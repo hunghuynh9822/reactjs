@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectLanguage from './HeaderSelectLanguage.js';
+import SelectLanguage from '../InAllMode/HeaderSelectLanguage.js';
 
 class TopBar extends React.PureComponent {
     render() {

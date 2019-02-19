@@ -18,8 +18,7 @@ class HeaderSelectLanguage extends Component {
                     </select>
                     
                 </div>
-                {/* <!-- Container Selection1 --> */}
-                <div id="dropDownSelect1"></div>
+                
             </div>
         );
     }
