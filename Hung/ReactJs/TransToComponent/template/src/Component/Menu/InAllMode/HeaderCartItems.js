@@ -19,7 +19,7 @@ class HeaderCartItems extends Component {
 
         for(var i=0; i<menu.length; i++){
             $(menu[i]).on('click', function(){ 
-                if(jQuery.inArray( this, menu ) == sub_menu_is_showed){
+                if(jQuery.inArray( this, menu ) === sub_menu_is_showed){
                     $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
                     sub_menu_is_showed = -1;
                 }
@@ -51,21 +51,18 @@ class HeaderCartItems extends Component {
         this.state={
             cartItems : [
                 {
-                    id: 1,
                     tittle: "White Shirt With Pleat Detail Back",
                     image:"images/item-cart-01.jpg",
                     count:1,
                     price:19
                 },
                 {
-                    id: 2,
                     tittle: "Converse All Star Hi Black Canvas",
                     image:"images/item-cart-02.jpg",
                     count:1,
-                    price:39000
+                    price:39
                 },
                 {
-                    id: 3,
                     tittle: "Nixon Porter Leather Watch In Tan",
                     image:"images/item-cart-03.jpg",
                     count:1,
@@ -84,8 +81,8 @@ class HeaderCartItems extends Component {
     }
     
     render() {
-        var items = this.state.cartItems.map((e,i) => (
-            <Item key={i} tittle={e.tittle} image={e.image} count={e.count} price={e.price}></Item>
+        var items = this.state.cartItems.map((e,index) => (
+            <Item key={index} tittle={e.tittle} image={e.image} count={e.count} price={e.price}></Item>
         ));
         return (
             <div className="header-cart header-dropdown">
